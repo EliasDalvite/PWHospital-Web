@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">Manutenção de Paciente</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListagem" prependId="false">
+                <p:growl/>
+                <p:commandButton value="Novo" actionListener="#{controlePaciente.novo()}"
+                                 icon="pi pi-plus"
+                                 update="formEdicao"
+                                 process="@this"
+                                 oncomplete="PF('dlg').show();"/>
+                <p:dataTable value="#{controlePaciente.dao.listaObjetos}" var="obj"
+                             id="listagem">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{obj.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{obj.nome}"/>
+                    </p:column> 
+                    <p:column headerText="Telefone">
+                        <p:outputLabel value="#{obj.telefone}"/>
+                    </p:column> 
+                    <p:column headerText="Nascimento">
+                        <p:outputLabel value="#{obj.nascimento}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel>
+                    </p:column> 
+                    <p:column headerText="Sexo">
+                        <p:outputLabel value="#{obj.sexo}"/>
+                    </p:column> 
+                    <p:column headerText="Altura">
+                        <p:outputLabel value="#{obj.altura}"/>
+                    </p:column> 
+                    <p:column headerText="Peso">
+                        <p:outputLabel value="#{obj.peso}"/>
+                    </p:column> 
+                    <p:column headerText="Historico">
+                        <p:outputLabel value="#{obj.historico}"/>
+                    </p:column> 
+                    <p:column headerText="Ações">
+                        <div align="left">
+                            <p:commandButton 
+                                actionListener="#{controlePaciente.alterar(obj.id)}"
+                                icon="pi pi-pencil"
+                                             title="Editar"
+                                             update="formEdicao"
+                                             process="@this"
+                                             oncomplete="PF('dlg').show();"/>
+                            <p:commandButton
+                                actionListener="#{controlePaciente.excluir(obj.id)}"
+                                icon="pi pi-trash"
+                                             update="@form"
+                                             process="@this"
+                                             onclick="if (!confirm('Confirma a exclusão')) return false"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>  
+            <p:dialog header="Edição" widgetVar="dlg" resizable="false"
+                modal="true" width="50%" height="100%">
+                <h:form id="formEdicao" prependId="false">
+                    <p:growl id="growl"/>
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID" for="txtId"/>
+                            <p:inputText value="#{controlePaciente.objeto.id}"
+                                         readonly="true" size="5" id="txtId"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText id="txtNome"
+                                         value="#{controlePaciente.objeto.nome}"
+                                         size="30" maxlength="30"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Telefone" for="txtTelefone"/>
+                            <p:inputText id="txtTelefone"
+                                         value="#{controlePaciente.objeto.telefone}" 
+                                         size="15" maxlength="15"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Nascimento" for="txtNascimento"/>
+                            <p:calendar id="txtNascimento" 
+                                        value="#{controlePaciente.objeto.nascimento}"
+                                        mask="dd/MM/yyyy" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>
+                            <p:outputLabel value="Sexo" for="txtSexo"/>
+                            <p:inputText id="txtSexo"
+                                         value="#{controlePaciente.objeto.sexo}"
+                                         size="10" maxlength="10"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Altura" for="txtAltura"/>
+                            <p:inputText id="txtAltura" value="#{controlePaciente.objeto.altura}"
+                                         size="9" maxlength="9"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Peso" for="txtPeso"/>
+                            <p:inputText id="txtPeso" value="#{controlePaciente.objeto.peso}"
+                                         size="9" maxlength="9"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Histórico" for="txtHistorico"/>
+                            <p:inputText id="txtHistorico"
+                                         value="#{controlePaciente.objeto.historico}"
+                                         size="500" maxlength="500"
+                                         placeholder="Obrigatório"/>                     
+                        </p:panelGrid>
+                    </div>
+                    <p:panel>
+                        <div align="center">
+                            <p:commandButton value="Salvar"
+                                             icon="pi pi-save"
+                                             actionListener="#{controlePaciente.salvar()}"
+                                             update="formEdicao formListagem"
+                                             oncomplete="if (!args.validationFailed){PF('dlg').hide();}"/>
+                        </div>
+                    </p:panel>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>
