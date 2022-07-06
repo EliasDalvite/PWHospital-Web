@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.dao;
 
+import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Consulta;
 import java.io.Serializable;
 import javax.ejb.Stateful;
@@ -18,5 +19,14 @@ public class ConsultaDAO <TIPO> extends DAOGenerico<Consulta> implements Seriali
     public ConsultaDAO(){
         super();
         classePersistente = Consulta.class;
+        // definir as ordens possiveis
+        listaOrdem.add(new Ordem("id", "ID", "="));
+        listaOrdem.add(new Ordem("paciente.nome", "Paciente", "like"));
+        listaOrdem.add(new Ordem("medico.nome", "Médico", "like"));
+        // definir a ordem inicial
+        ordematual = listaOrdem.get(0);
+        // inicializar o conversor das ordens
+        converterOrdem = new ConverterOrdem();
+        converterOrdem.setListaOrdem(listaOrdem);
     }
 }

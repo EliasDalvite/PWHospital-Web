@@ -24,11 +24,11 @@ public class ControleExame implements Serializable {
     @EJB
     private ExameDAO<Exame> dao;
     private Exame objeto;
-    
+       
     public ControleExame() {
 
     }
-
+    
     public String listar(){
         return "/privado/exame/listar?faces-redirect=true";
     }

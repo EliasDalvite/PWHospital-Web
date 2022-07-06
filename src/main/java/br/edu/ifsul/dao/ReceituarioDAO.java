@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.dao;
 
+import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Receituario;
 import java.io.Serializable;
 import javax.ejb.Stateful;
@@ -18,5 +19,13 @@ public class ReceituarioDAO <TIPO> extends DAOGenerico<Receituario> implements S
     public ReceituarioDAO(){
         super();
         classePersistente = Receituario.class;
+        // definir as ordens possiveis
+        listaOrdem.add(new Ordem("id", "ID", "="));
+        listaOrdem.add(new Ordem("nome", "Nome", "like"));
+        // definir a ordem inicial
+        ordematual = listaOrdem.get(1);
+        // inicializar o conversor das ordens
+        converterOrdem = new ConverterOrdem();
+        converterOrdem.setListaOrdem(listaOrdem);
     }
 }

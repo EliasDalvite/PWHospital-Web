@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:dialog header="Edição" widgetVar="dlg" resizable="false"
+              modal="true" width="50%" height="100%">
+        <h:form id="formEdicao" prependId="false">
+            <p:growl id="growl"/>
+            <p:tabView id="tab">
+                <p:tab title="Dados Principais">
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controleConsulta.objeto.id}"
+                                         size="5" readonly="true"/>
+
+                            <p:outputLabel value="Data" for="txtData"/>
+                            <p:calendar id="txtData" value="#{controleConsulta.objeto.data}"
+                                        mask="true" pattern="dd/MM/yyyy" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>
+
+                            <p:outputLabel value="Hora" for="txtHora"/>
+                            <p:calendar id="txtHora" value="#{controleConsulta.objeto.hora}"
+                                        mask="true" pattern="HH/mm/ss" navigator="true">
+                                <f:converter converterId="converterCalendarHoras"/>
+                            </p:calendar>
+
+                            <p:outputLabel value="Paciente" for="selectPaciente"/>
+                            <p:selectOneMenu value="#{controleConsulta.objeto.paciente}"
+                                             id="selectPaciente"
+                                             filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel="Selecione um registro"/>
+                                <f:converter binding="#{converterPaciente}"/>
+                                <f:selectItems value="#{controleConsulta.daoPaciente.listaTodos}"
+                                               var="paci" itemLabel="#{paci.nome}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Medico" for="selectMedico"/>
+                            <p:selectOneMenu value="#{controleConsulta.objeto.medico}"
+                                             id="selectMedico"
+                                             filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel="Selecione um registro"/>
+                                <f:converter binding="#{converterMedico}"/>
+                                <f:selectItems value="#{controleConsulta.daoMedico.listaTodos}"
+                                               var="med" itemLabel="#{med.nome}"/>
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                    </div>
+                </p:tab>
+                <p:tab title="Pre Consulta">
+                    <p:textEditor value="#{controleConsulta.objeto.preconsulta}"
+                                  secure="false" height="200" placeholder="Obrigatório"/>
+                </p:tab>
+                <p:tab title="Pos Consulta">
+                    <p:textEditor value="#{controleConsulta.objeto.posconsulta}"
+                                  secure="false" height="200" placeholder="Obrigatório"/>
+                </p:tab>
+                <p:tab title="Exames">
+                    <p:dataTable value="#{controleConsulta.objeto.exames}"
+                                 var="Exame" rowIndexVar="idxExame"
+                                 id="listaExames">
+                        <f:facet name="header">
+                            <p:commandButton  value="Novo Exame"
+                                              actionListener="#{controleConsulta.novoExame()}"
+                                              update=":formExame"
+                                              icon="pi pi-plus"
+                                              process="@this"
+                                              oncomplete="PF('dlgExame').show();"/>                                              
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{Exame.id}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{Exame.nome}"/>
+                        </p:column>                        
+                        <p:column headerText="Descrição">
+                            <p:outputLabel value="#{Exame.descricao}"/>
+                        </p:column>                        
+                        <p:column headerText="Ações">
+                            <p:commandButton icon="pi pi-pencil"
+                                             actionListener="#{controleConsulta.alterarExame(idxExame)}"
+                                             process="@this"
+                                             update=":formExame"
+                                             oncomplete="PF('dlgExame').show();"/>
+                            <p:commandButton icon="pi pi-trash"
+                                             actionListener="#{controleConsulta.removerExame(idxExame)}"
+                                             process="@this"
+                                             update="tab:listaExames growl"
+                                             onclick="if (!confirm('Confirma a exclusão do exame?'))
+                                                         return false"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+            <p:panel>
+                <div align="center">
+                    <p:commandButton value="Salvar"
+                                     icon="pi pi-save"
+                                     actionListener="#{controleConsulta.salvar()}"
+                                     update="formEdicao formListagem"
+                                     oncomplete="if (!args.validationFailed){PF('dlg').hide();}"/>
+                </div>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog header="Edição de Exame" widgetVar="dlgExame" resizable="false"
+              modal="true">
+        <h:form id="formExame">
+            <p:growl/>
+            <p:panelGrid columns="2">
+                <f:facet name="footer">
+                    <div align="center">
+                        <p:commandButton value="Salvar" icon="pi pi-save"
+                                         actionListener="#{controleConsulta.salvarExame()}"
+                                         update="tab:listaExames growl @form"
+                                         process="@form"
+                                         oncomplete="if(!args.validationFailed){PF('dlgExame').hide();}"/>
+                    </div>
+                </f:facet>
+                <p:outputLabel value="ID"/>
+                <p:inputText value="#{controleConsulta.exame.id}" readonly="true"/>
+                <p:outputLabel value="Nome" for="txtNome"/>
+                <p:inputText value="#{controleConsulta.exame.nome}" id="txtNome"
+                             placeholder="Obrigatório" size="50" maxlength="50"/>
+                <p:outputLabel value="Descrição" for="txtDescricao" id="txtDescricao"/>
+                <p:inputText value="#{controleConsulta.exame.descricao}"
+                             />                
+            </p:panelGrid>
+        </h:form>        
+    </p:dialog>
+</html>
+
+
