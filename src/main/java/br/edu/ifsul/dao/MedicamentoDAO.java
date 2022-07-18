@@ -6,6 +6,7 @@
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
+import br.edu.ifsul.modelo.Consulta;
 import br.edu.ifsul.modelo.Medicamento;
 import java.io.Serializable;
 import javax.ejb.Stateful;
@@ -27,5 +28,5 @@ public class MedicamentoDAO <TIPO> extends DAOGenerico<Medicamento> implements S
         // inicializar o conversor das ordens
         converterOrdem = new ConverterOrdem();
         converterOrdem.setListaOrdem(listaOrdem);
-    }
+    }  
 }

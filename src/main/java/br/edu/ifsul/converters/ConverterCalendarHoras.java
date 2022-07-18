@@ -25,7 +25,7 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = "converterCalendarHoras")
 public class ConverterCalendarHoras implements Serializable, Converter<Object>{
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("HH/mm/ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");;
     
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

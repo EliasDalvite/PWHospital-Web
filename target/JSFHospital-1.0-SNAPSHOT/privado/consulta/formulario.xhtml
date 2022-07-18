@@ -24,7 +24,7 @@
 
                             <p:outputLabel value="Hora" for="txtHora"/>
                             <p:calendar id="txtHora" value="#{controleConsulta.objeto.hora}"
-                                        mask="true" pattern="HH/mm/ss" navigator="true">
+                                        mask="true" pattern="HH:mm" timeOnly="true">
                                 <f:converter converterId="converterCalendarHoras"/>
                             </p:calendar>
 
@@ -99,6 +99,44 @@
                         </p:column>
                     </p:dataTable>
                 </p:tab>
+                <p:tab title="Receituarios">
+                    <p:dataTable value="#{controleConsulta.objeto.receituarios}"
+                                 var="Receituario" rowIndexVar="idxReceituario"
+                                 id="listaReceituarios">
+                        <f:facet name="header">
+                            <p:commandButton  value="Novo Receituario"
+                                              actionListener="#{controleConsulta.novoReceituario()}"
+                                              update=":formReceituario"
+                                              icon="pi pi-plus"
+                                              process="@this"
+                                              oncomplete="PF('dlgReceituario').show();"/>                                              
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{Receituario.id}"/>
+                        </p:column>
+                        <p:column headerText="Posologia">
+                            <p:outputLabel value="#{Receituario.posologia}"/>
+                        </p:column>                        
+                        <p:column headerText="Validade">
+                            <p:outputLabel value="#{Receituario.validade}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton icon="pi pi-pencil"
+                                             actionListener="#{controleConsulta.alterarReceituario(idxReceituario)}"
+                                             process="@this"
+                                             update=":formReceituario"
+                                             oncomplete="PF('dlgReceituario').show();"/>
+                            <p:commandButton icon="pi pi-trash"
+                                             actionListener="#{controleConsulta.removerReceituario(idxReceituario)}"
+                                             process="@this"
+                                             update="tab:listaReceituarios growl"
+                                             onclick="if (!confirm('Confirma a exclusão do receituario?'))
+                                                         return false"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
             </p:tabView>
             <p:panel>
                 <div align="center">
@@ -137,6 +175,34 @@
             </p:panelGrid>
         </h:form>        
     </p:dialog>
+    
+    <p:dialog header="Edição de Receituario" widgetVar="dlgReceituario" resizable="false"
+              modal="true">
+        <h:form id="formReceituario">
+            <p:growl/>
+            <p:panelGrid columns="2">
+                <f:facet name="footer">
+                    <div align="center">
+                        <p:commandButton value="Salvar" icon="pi pi-save"
+                                         actionListener="#{controleConsulta.salvarReceituario()}"
+                                         update="tab:listaReceituarios growl @form"
+                                         process="@form"
+                                         oncomplete="if(!args.validationFailed){PF('dlgReceituario').hide();}"/>
+                    </div>
+                </f:facet>
+                <p:outputLabel value="ID"/>
+                <p:inputText value="#{controleConsulta.receituario.id}" readonly="true"/>
+                <p:outputLabel value="Posologia" for="txtPosologia"/>
+                <p:inputText value="#{controleConsulta.receituario.posologia}" id="txtPosologia"
+                             placeholder="Obrigatório" size="50" maxlength="50"/>
+                <p:outputLabel value="Validade"/>
+                <p:calendar id="txtvalidade" value="#{controleConsulta.receituario.validade}"
+                             mask="true" pattern="dd/MM/yyyy" navigator="true">
+                             <f:converter converterId="converterCalendar"/>
+                </p:calendar>
+                    
+            </p:panelGrid>
+        </h:form>        
+    </p:dialog>
 </html>
-
 

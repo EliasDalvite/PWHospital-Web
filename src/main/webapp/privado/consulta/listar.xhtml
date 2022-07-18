@@ -72,23 +72,21 @@
                         </p:outputLabel>
                     </p:column>
                     <p:column headerText="Hora">
-                        <p:outputLabel value="#{obj.data}">
+                        <p:outputLabel value="#{obj.hora}">
                             <f:converter converterId="converterCalendarHoras"/>
                         </p:outputLabel>
                     </p:column>
                     <p:column headerText="Preconsulta">
-                        <p:outputLabel value="#{obj.preconsulta}"/>
+                        <p:outputLabel value="#{obj.preconsulta}" escape="false"/>
                     </p:column>
                     <p:column headerText="Posconsulta">
-                        <p:outputLabel value="#{obj.posconsulta}"/>
+                        <p:outputLabel value="#{obj.posconsulta}" escape="false"/>
                     </p:column>
                     
                     <p:column headerText="Paciente">
                         <p:outputLabel value="#{obj.paciente.nome}"/> 
                     </p:column> 
-                    <!-- <p:column headerText="Exame">
-                        <p:outputLabel value="#{obj.exame.nome}"/> 
-                    </p:column>  -->
+                    
                     <p:column headerText="Medico">
                         <p:outputLabel value="#{obj.medico.nome}"/> 
                     </p:column> 

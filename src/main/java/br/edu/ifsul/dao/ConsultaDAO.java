@@ -29,4 +29,16 @@ public class ConsultaDAO <TIPO> extends DAOGenerico<Consulta> implements Seriali
         converterOrdem = new ConverterOrdem();
         converterOrdem.setListaOrdem(listaOrdem);
     }
+    
+    @Override
+    public Consulta getObjectByID(Object id) throws Exception {
+        Consulta obj = em.find(Consulta.class, id);
+        // uso para evitar o erro de lazy inicialization exception
+        obj.getReceituarios().size();
+        obj.getExames().size();
+        return obj;
+    }   
+    
+    
+    
 }

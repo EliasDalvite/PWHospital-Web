@@ -6,6 +6,7 @@
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
+import br.edu.ifsul.modelo.Medicamento;
 import br.edu.ifsul.modelo.Receituario;
 import java.io.Serializable;
 import javax.ejb.Stateful;
@@ -28,4 +29,12 @@ public class ReceituarioDAO <TIPO> extends DAOGenerico<Receituario> implements S
         converterOrdem = new ConverterOrdem();
         converterOrdem.setListaOrdem(listaOrdem);
     }
+    
+    @Override
+    public Receituario getObjectByID(Object id) throws Exception {
+        Receituario obj = em.find(Receituario.class, id);
+        // uso para evitar o erro de lazy inicialization exception
+        obj.getMedicamentos().size();
+        return obj;
+    } 
 }

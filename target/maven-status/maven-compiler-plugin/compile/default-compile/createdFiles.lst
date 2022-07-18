@@ -7,6 +7,7 @@ br\edu\ifsul\converters\ConverterOrdem.class
 br\edu\ifsul\converters\ConverterEspecialidade.class
 br\edu\ifsul\converters\ConverterMedico.class
 br\edu\ifsul\controle\ControlePaciente.class
+br\edu\ifsul\dao\PermissaoDAO.class
 br\edu\ifsul\converters\ConverterCalendar.class
 br\edu\ifsul\controle\ControleExame.class
 br\edu\ifsul\dao\ReceituarioDAO.class
@@ -15,7 +16,10 @@ br\edu\ifsul\controle\ControleEspecialidade.class
 br\edu\ifsul\dao\ExameDAO.class
 br\edu\ifsul\dao\MedicoDAO.class
 br\edu\ifsul\converters\ConverterExame.class
+br\edu\ifsul\util\UtilRelatorios.class
+br\edu\ifsul\dao\UsuarioDAO.class
 br\edu\ifsul\controle\ControleReceituario.class
+br\edu\ifsul\controle\ControleLogin.class
 br\edu\ifsul\converters\ConverterCalendarHoras.class
 br\edu\ifsul\dao\MedicamentoDAO.class
 br\edu\ifsul\dao\PacienteDAO.class
@@ -23,4 +27,5 @@ br\edu\ifsul\dao\EspecialidadeDAO.class
 br\edu\ifsul\controle\ControleConsulta.class
 br\edu\ifsul\dao\ConsultaDAO.class
 br\edu\ifsul\controle\ControleMedico.class
+br\edu\ifsul\converters\ConverterMedicamento.class
 br\edu\ifsul\converters\ConverterPaciente.class

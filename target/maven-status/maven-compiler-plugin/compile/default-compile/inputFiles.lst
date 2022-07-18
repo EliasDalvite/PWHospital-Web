@@ -1,4 +1,5 @@
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterPaciente.java
+C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\util\UtilRelatorios.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterExame.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\MedicoDAO.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\controle\ControleConsulta.java
@@ -10,8 +11,11 @@ C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\e
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\controle\ControleExame.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterEspecialidade.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterCalendarHoras.java
+C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\PermissaoDAO.java
+C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\controle\ControleLogin.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterReceituario.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\controle\ControleEspecialidade.java
+C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterMedicamento.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\controle\ControleMedico.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterCalendar.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\PacienteDAO.java
@@ -23,4 +27,5 @@ C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\e
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\converters\ConverterMedico.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\util\Util.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\EspecialidadeDAO.java
+C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\UsuarioDAO.java
 C:\Users\Elias Dalvite\Documents\NetBeansProjects\JSFHospital\src\main\java\br\edu\ifsul\dao\ExameDAO.java

@@ -15,7 +15,12 @@
                                  update="formEdicao"
                                  process="@this"
                                  oncomplete="PF('dlg').show();"/>
-                <div align="center">
+                <p:commandButton value="Imprimir" 
+                                 action="#{controlePaciente.imprimePacientes()}"
+                                 icon="pi pi-print"
+                                 ajax="false"
+                                 onclick="this.form.target='_blank';"/>
+                                <div align="center">
                     <p:panelGrid columns="1">
                         <p:outputLabel value="Manutenção de Pacientes"/>
                     </p:panelGrid>
@@ -103,6 +108,11 @@
                                              update="@form"
                                              process="@this"
                                              onclick="if (!confirm('Confirma a exclusão')) return false"/>
+                            <p:commandButton title="Imprimir" 
+                                 action="#{controlePaciente.imprimePaciente(obj.id)}"
+                                 icon="pi pi-print"
+                                 ajax="false"
+                                 onclick="this.form.target='_blank';"/>
                         </div>
                     </p:column>
                 </p:dataTable>

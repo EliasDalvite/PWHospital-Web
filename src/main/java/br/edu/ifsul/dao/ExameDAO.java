@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.dao;
 
+import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Exame;
 import java.io.Serializable;
 import javax.ejb.Stateful;
@@ -19,5 +20,13 @@ public class ExameDAO <TIPO> extends DAOGenerico<Exame> implements Serializable 
     public ExameDAO(){
         super();
         classePersistente = Exame.class;
+        // definir as ordens possiveis
+        listaOrdem.add(new Ordem("id", "ID", "="));
+        listaOrdem.add(new Ordem("posologia", "Posologia", "like"));
+        // definir a ordem inicial
+        ordematual = listaOrdem.get(1);
+        // inicializar o conversor das ordens
+        converterOrdem = new ConverterOrdem();
+        converterOrdem.setListaOrdem(listaOrdem);
     }
 }

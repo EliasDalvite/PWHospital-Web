@@ -10,9 +10,11 @@ import br.edu.ifsul.dao.ConsultaDAO;
 import br.edu.ifsul.dao.ExameDAO;
 import br.edu.ifsul.dao.MedicoDAO;
 import br.edu.ifsul.dao.PacienteDAO;
+import br.edu.ifsul.dao.ReceituarioDAO;
 import br.edu.ifsul.modelo.Exame;
 import br.edu.ifsul.modelo.Medico;
 import br.edu.ifsul.modelo.Paciente;
+import br.edu.ifsul.modelo.Receituario;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -36,6 +38,11 @@ public class ControleConsulta implements Serializable {
     private PacienteDAO<Paciente> daoPaciente;
     @EJB
     private ExameDAO<Exame> daoExame;
+    @EJB
+    private ReceituarioDAO<Receituario> daoReceituario;
+    
+    private Receituario receituario;
+    private Boolean novoReceituario;
     
     private Exame exame;
     private Boolean novoExame;
@@ -64,6 +71,28 @@ public class ControleConsulta implements Serializable {
     public void removerExame(int index) {
         objeto.removerExame(index);
         Util.mensagemInformacao("Exame removido com sucesso!");
+    }
+    
+    public void novoReceituario() {
+        setNovoReceituario((Boolean) true);
+        setReceituario(new Receituario());
+    }
+
+    public void alterarReceituario(int index) {
+        setReceituario(objeto.getReceituarios().get(index));
+        setNovoReceituario((Boolean) false);
+    }
+
+    public void salvarReceituario() {
+        if (getNovoReceituario()) {
+            objeto.adicionarReceituario(getReceituario());
+        }
+        Util.mensagemInformacao("Receituario adicionado ou atualizado com sucesso");
+    }
+    
+    public void removerReceituario(int index) {
+        objeto.removerReceituario(index);
+        Util.mensagemInformacao("Receituario removido com sucesso!");
     }
 
     public String listar(){
@@ -160,4 +189,30 @@ public class ControleConsulta implements Serializable {
     public void setNovoExame(Boolean novoExame) {
         this.novoExame = novoExame;
     }
+
+    public ReceituarioDAO<Receituario> getDaoReceituario() {
+        return daoReceituario;
+    }
+
+    public void setDaoReceituario(ReceituarioDAO<Receituario> daoReceituario) {
+        this.daoReceituario = daoReceituario;
+    }
+
+    public Receituario getReceituario() {
+        return receituario;
+    }
+
+    public void setReceituario(Receituario receituario) {
+        this.receituario = receituario;
+    }
+
+    public Boolean getNovoReceituario() {
+        return novoReceituario;
+    }
+
+    public void setNovoReceituario(Boolean novoReceituario) {
+        this.novoReceituario = novoReceituario;
+    }
+    
+    
 }
